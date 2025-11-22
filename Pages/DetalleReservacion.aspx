@@ -47,13 +47,13 @@
             </tr> <!--Row 10-->
         </Table>
 
-        <div>
+        <div class="mb-3">
             <asp:Button ID="btnEditar" runat="server" Text="Editar reservacion" CssClass="btn btn-outline-dark" OnClick="btnEditar_Click" />
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservacion" CssClass="btn btn-outline-dark" OnClick="btnCancelar_Click" />
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-dark" OnClick="btnRegresar_Click" />
         </div>
         
-        <div>
+        <div class="mb-3">
         <asp:GridView ID="grdBitacora" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover">
             <Columns>
                 <asp:BoundField DataField="FechaAccionFormato" HeaderText="Fecha"  />

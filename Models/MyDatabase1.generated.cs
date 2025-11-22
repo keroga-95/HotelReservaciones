@@ -389,6 +389,26 @@ namespace DataModels
 
 		#endregion
 
+		#region SpReservacionesParaEmpleado
+
+		public static IEnumerable<SpReservacionesParaEmpleadoResult> SpReservacionesParaEmpleado(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpReservacionesParaEmpleadoResult>("[dbo].[SpReservacionesParaEmpleado]");
+		}
+
+		public partial class SpReservacionesParaEmpleadoResult
+		{
+			[Column("idReservacion")] public int      IdReservacion { get; set; }
+			                          public string   Nombre        { get; set; }
+			                          public string   Hotel         { get; set; }
+			[Column("fechaEntrada") ] public DateTime FechaEntrada  { get; set; }
+			[Column("fechaSalida")  ] public DateTime FechaSalida   { get; set; }
+			[Column("costoTotal")   ] public decimal  CostoTotal    { get; set; }
+			[Column("estado")       ] public char     Estado        { get; set; }
+		}
+
+		#endregion
+
 		#region SpReservacionesPorPersona
 
 		public static IEnumerable<SpReservacionesPorPersonaResult> SpReservacionesPorPersona(this PvProyectoFinalDB dataConnection, int? @idPersona)

@@ -14,7 +14,8 @@ namespace HotelReservaciones.Pages
         {
             try 
             {
-                if (Session["idPersona"] != null) {
+                Boolean Empleado = Convert.ToBoolean(Session["esEmpleado"]);
+                if (Session["idPersona"] != null && Empleado == false) {
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
                     {
                         int idPersona = Convert.ToInt32(Session["idPersona"]);
