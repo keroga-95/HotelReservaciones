@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center align-items-center" style="height:35vh;">
         <div>
 
-            <div class="mb-3">
+            <div class="mb-1">
                 <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label><br />
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox><br />
                 <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Correo electronico es requerido" ControlToValidate="txtEmail" ForeColor="Red" Font-Bold="true"></asp:RequiredFieldValidator>

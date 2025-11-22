@@ -207,6 +207,29 @@ namespace DataModels
 
 	public static partial class PvProyectoFinalDBStoredProcedures
 	{
+		#region SpBitacoraPorReservacion
+
+		public static IEnumerable<SpBitacoraPorReservacionResult> SpBitacoraPorReservacion(this PvProyectoFinalDB dataConnection, int? @idReservacion)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idReservacion", @idReservacion, LinqToDB.DataType.Int32)
+			};
+
+			return dataConnection.QueryProc<SpBitacoraPorReservacionResult>("[dbo].[SpBitacoraPorReservacion]", parameters);
+		}
+
+		public partial class SpBitacoraPorReservacionResult
+		{
+			[Column("idBitacora")     ] public int    IdBitacora         { get; set; }
+			                            public string FechaAccion        { get; set; }
+			                            public string FechaAccionFormato { get; set; }
+			[Column("accionRealizada")] public string AccionRealizada    { get; set; }
+			                            public string Persona            { get; set; }
+		}
+
+		#endregion
+
 		#region SpConsultarReservacion
 
 		public static IEnumerable<Reservacion> SpConsultarReservacion(this PvProyectoFinalDB dataConnection)

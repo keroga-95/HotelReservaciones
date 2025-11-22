@@ -13,7 +13,7 @@
             <asp:BoundField DataField="hotel" HeaderText="Hotel" />
             <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada"  DataFormatString ="{0:dd/MM/yyyy}" />
             <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida"  DataFormatString ="{0:dd/MM/yyyy}" />
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo" />
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="${0:N2}" />
             <asp:BoundField DataField="estado" HeaderText="Estado" />
 
             <asp:TemplateField HeaderText="Estado Completo">

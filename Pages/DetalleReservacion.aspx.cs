@@ -37,6 +37,7 @@ namespace HotelReservaciones.Pages
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase")) 
                     { 
                         var reservacion = db.SpObtenerReservacionPorId(id).FirstOrDefault();
+                        var lista = db.SpBitacoraPorReservacion(id).ToList();
                         if (reservacion != null) 
                         {
                             txtNumReservacion.Text = reservacion.NumeroReservacion.ToString();
@@ -51,6 +52,9 @@ namespace HotelReservaciones.Pages
                             /*txtCostoTotal.Text = reservacion.CostoTotal.ToString();*/
                             txtCostoTotal.Text = string.Format("${0:N2}", reservacion.CostoTotal);
 
+                            grdBitacora.DataSource = lista;
+                            grdBitacora.DataBind();
+
                         }//Fin IF reservacion
                         else 
                         { Response.Redirect("~/Pages/MisReservaciones.aspx"); }//Fin else reservacion
@@ -60,7 +64,21 @@ namespace HotelReservaciones.Pages
             catch 
             { 
             }//Fin catch
+        }//Fin PageLoad
 
+        protected void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/MisReservaciones.aspx");
+        }//Fin regresar
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/ModificarReservacion");
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/MisReservaciones.aspx");
         }
     }
 }
