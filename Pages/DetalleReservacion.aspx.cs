@@ -57,7 +57,11 @@ namespace HotelReservaciones.Pages
 
                         }//Fin IF reservacion
                         else 
-                        { Response.Redirect("~/Pages/MisReservaciones.aspx"); }//Fin else reservacion
+                        {
+                            if (esEmpleado)
+                                Response.Redirect("~/Pages/GestionarReservaciones.aspx");
+                            else
+                                Response.Redirect("~/Pages/MisReservaciones.aspx"); ; }//Fin else reservacion
                     }//Fin Using DB
                 }//Fin if
             }//Fin Try
@@ -68,7 +72,11 @@ namespace HotelReservaciones.Pages
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/MisReservaciones.aspx");
+            Boolean Empleado = Convert.ToBoolean(Session["esEmpleado"]);
+            if (Empleado)
+                Response.Redirect("~/Pages/GestionarReservaciones.aspx");
+            else
+                Response.Redirect("~/Pages/MisReservaciones.aspx");
         }//Fin regresar
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -78,7 +86,11 @@ namespace HotelReservaciones.Pages
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/MisReservaciones.aspx");
+            Boolean Empleado = Convert.ToBoolean(Session["esEmpleado"]);
+            if (Empleado)
+                Response.Redirect("~/Pages/GestionarReservaciones.aspx");
+            else
+                Response.Redirect("~/Pages/MisReservaciones.aspx");
         }
     }
 }

@@ -60,5 +60,6 @@ namespace HotelReservaciones.Pages
                 return "Estado invalido";
             }//Fin IF "I"
         }//fin Evaluador
+
     }
 }

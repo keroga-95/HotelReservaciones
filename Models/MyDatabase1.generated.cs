@@ -305,6 +305,48 @@ namespace DataModels
 
 		#endregion
 
+		#region SpFiltrarReservacionesEmpleado
+
+		public static IEnumerable<SpFiltrarReservacionesEmpleadoResult> SpFiltrarReservacionesEmpleado(this PvProyectoFinalDB dataConnection, int? @idPersona, DateTime? @fechaDesde, DateTime? @fechaHasta)
+		{
+			var parameters = new []
+			{
+				new DataParameter("@idPersona",  @idPersona,  LinqToDB.DataType.Int32),
+				new DataParameter("@fechaDesde", @fechaDesde, LinqToDB.DataType.Date),
+				new DataParameter("@fechaHasta", @fechaHasta, LinqToDB.DataType.Date)
+			};
+
+			return dataConnection.QueryProc<SpFiltrarReservacionesEmpleadoResult>("[dbo].[SpFiltrarReservacionesEmpleado]", parameters);
+		}
+
+		public partial class SpFiltrarReservacionesEmpleadoResult
+		{
+			[Column("idReservacion")] public int      IdReservacion { get; set; }
+			                          public string   Nombre        { get; set; }
+			                          public string   Hotel         { get; set; }
+			[Column("fechaEntrada") ] public DateTime FechaEntrada  { get; set; }
+			[Column("fechaSalida")  ] public DateTime FechaSalida   { get; set; }
+			[Column("costoTotal")   ] public decimal  CostoTotal    { get; set; }
+			[Column("estado")       ] public char     Estado        { get; set; }
+		}
+
+		#endregion
+
+		#region SpListarPersonasActivas
+
+		public static IEnumerable<SpListarPersonasActivasResult> SpListarPersonasActivas(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpListarPersonasActivasResult>("[dbo].[SpListarPersonasActivas]");
+		}
+
+		public partial class SpListarPersonasActivasResult
+		{
+			[Column("idPersona")     ] public int    IdPersona      { get; set; }
+			[Column("nombreCompleto")] public string NombreCompleto { get; set; }
+		}
+
+		#endregion
+
 		#region SpLogin
 
 		public static IEnumerable<SpLoginResult> SpLogin(this PvProyectoFinalDB dataConnection, string @Email, string @Clave)
