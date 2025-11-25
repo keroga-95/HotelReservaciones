@@ -47,7 +47,7 @@ namespace HotelReservaciones.Pages
                 catch (Exception ex)
                 { }
             }
-        }
+        }//Fin page load
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -68,7 +68,7 @@ namespace HotelReservaciones.Pages
             }
             catch (Exception ex) 
             { }
-        }
+        }//Fin btn
 
         public string EvaluadorEstado(string estado, DateTime fechaEntrada, DateTime fechaSalida)
         {
@@ -110,6 +110,6 @@ namespace HotelReservaciones.Pages
             }
             catch (Exception ex) 
             { args.IsValid = false; }
-        }
+        }//Fin cuvFecha
     }
 }

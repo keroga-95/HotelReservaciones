@@ -33,6 +33,17 @@ namespace HotelReservaciones.Pages
                 }//Fin try
                 catch { }//Fin catch
             }//Fin IF
+        }//Fin Page Load
+
+
+        public string EvaluadorEstado(string estado)
+        {
+            if (estado == "I")
+            { return "Inactiva"; }
+            else if (estado == "A") 
+             { return "Activa";}
+            else { return "Estado invalido"; }
         }
+
     }
 }

@@ -252,6 +252,7 @@
     <Content Include="Pages\CrearReservacion.aspx" />
     <Content Include="Pages\DetalleReservacion.aspx" />
     <Content Include="Pages\EditarHabitacion.aspx" />
+    <Content Include="Pages\ExitoHabitacion.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />
     <Content Include="Pages\ListaHabitaciones.aspx" />
     <Content Include="Pages\Login.aspx" />
@@ -395,6 +396,13 @@
     </Compile>
     <Compile Include="Pages\EditarHabitacion.aspx.designer.cs">
       <DependentUpon>EditarHabitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ExitoHabitacion.aspx.cs">
+      <DependentUpon>ExitoHabitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ExitoHabitacion.aspx.designer.cs">
+      <DependentUpon>ExitoHabitacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
