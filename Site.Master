@@ -38,6 +38,7 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <!-- Header -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light" style="background-color:lightblue">
             <div class="container">
                 <a class="navbar-brand" runat="server" href="#"> <img src = "https://w7.pngwing.com/pngs/875/1014/png-transparent-booking-com-logo-square-tech-companies.png" alt="" width="45" height="30" class="d-inline-block align-text-top" />
@@ -46,10 +47,18 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between"> <!-- Menu Header. -->
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
-                    </ul>
+                        <!-- <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li> -->
+                        <asp:Label ID="lblNombreUsuario" runat="server" Text="" Visible="false" CssClass="nav-link" ></asp:Label>
+                        <li class="nav-item"><a id="lblbtMisReservaciones" class="nav-link" runat="server" Visible="false" href="~/Pages/MisReservaciones.aspx">Mis reservaciones</a></li>
+                        <li class="nav-item"><a id="lblbtGestionarRes" class="nav-link" runat="server" Visible="false" href="~/Pages/GestionarReservaciones.aspx">Gestionar reservaciones</a></li>
+                        <li class="nav-item"><a id="lblbtGestionarHab" class="nav-link" runat="server" Visible="false" href="~/Pages/ListaHabitaciones.aspx">Gestionar habitaciones</a></li>
+                        
+                        <li class="nav-item">
+                            <asp:LinkButton ID="lblbtCerrar" runat="server" CssClass="nav-link" OnClick="lblbtCerrar_Click" Visible="false">Cerrar Sesion</asp:LinkButton>
+                        </li>
+                    </ul> 
                 </div>
             </div>
         </nav>

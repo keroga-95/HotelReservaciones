@@ -332,6 +332,24 @@ namespace DataModels
 
 		#endregion
 
+		#region SpListarHabitaciones
+
+		public static IEnumerable<SpListarHabitacionesResult> SpListarHabitaciones(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpListarHabitacionesResult>("[dbo].[SpListarHabitaciones]");
+		}
+
+		public partial class SpListarHabitacionesResult
+		{
+			[Column("idHabitacion")    ] public int    IdHabitacion     { get; set; }
+			                             public string Hotel            { get; set; }
+			[Column("numeroHabitacion")] public string NumeroHabitacion { get; set; }
+			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
+			[Column("estado")          ] public char   Estado           { get; set; }
+		}
+
+		#endregion
+
 		#region SpListarPersonasActivas
 
 		public static IEnumerable<SpListarPersonasActivasResult> SpListarPersonasActivas(this PvProyectoFinalDB dataConnection)

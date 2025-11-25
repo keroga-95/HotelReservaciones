@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,27 @@ namespace HotelReservaciones.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Page.IsPostBack == false)
+            {
+                try 
+                {
+                    if (Session["idPersona"] != null)
+                    {
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
+                        { 
+                            var habitaciones = db.SpListarHabitaciones().ToList();
+                            grdListaHabitaciones.DataSource = habitaciones;
+                            grdListaHabitaciones.DataBind();
 
+                        }
+                    }//Fin If Session
+                    else
+                    {
+                        Response.Redirect("~/Pages/Login.aspx");
+                    }
+                }//Fin try
+                catch { }//Fin catch
+            }//Fin IF
         }
     }
 }
