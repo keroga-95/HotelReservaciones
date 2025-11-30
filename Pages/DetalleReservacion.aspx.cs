@@ -31,7 +31,7 @@ namespace HotelReservaciones.Pages
                     {
                         Response.Redirect("~/Pages/MisReservaciones.aspx");
                         return;
-                    }
+                    }//Fin QueryString null
 
                     int id = int.Parse(Request.QueryString["idReservacion"]);
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase")) 

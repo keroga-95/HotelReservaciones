@@ -37,8 +37,11 @@ namespace HotelReservaciones.Pages
 
 
                         }//Fin DB
-
                     }//Fin IF ID != null and Empleado = true
+                    else if (Empleado == false) 
+                    {
+                        Response.Redirect("~/Pages/MisReservaciones.aspx");
+                    }
                     else
                     {
                         Response.Redirect("~/Pages/Login.aspx");

@@ -18,6 +18,12 @@ namespace HotelReservaciones.Pages
                 {
                     if (Session["idPersona"] != null)
                     {
+                        Boolean empleado = Convert.ToBoolean(Session["esEmpleado"]);
+                        if (empleado == false)
+                        {
+                            Response.Redirect("~/Pages/MisReservaciones.aspx");
+                        }//Fin If empleado
+
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
                         { 
                             var habitaciones = db.SpListarHabitaciones().ToList();
@@ -25,7 +31,7 @@ namespace HotelReservaciones.Pages
                             grdListaHabitaciones.DataBind();
 
                         }
-                    }//Fin If Session
+                    }//Fin If Session Null
                     else
                     {
                         Response.Redirect("~/Pages/Login.aspx");

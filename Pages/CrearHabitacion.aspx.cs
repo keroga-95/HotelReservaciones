@@ -37,24 +37,6 @@ namespace HotelReservaciones.Pages
             }
         }
 
-        protected void cuvCapacidadMax_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            args.IsValid = false;
-            try 
-            {
-                if (args.IsValid != null)
-                {
-                    int numeroCapacidad = Convert.ToInt32(txtCapacidadMax.Text);
-                    if (numeroCapacidad > 0 && numeroCapacidad <= 8 )
-                    {
-                        args.IsValid = true;
-                    }//Fin if capacidad
-                }//Fin if arg
-            }//Fin try
-            catch (Exception ex)
-            { args.IsValid = false; }//Fin catch
-        }//Fin cuvCapacidad
-
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
 
@@ -83,7 +65,7 @@ namespace HotelReservaciones.Pages
             {
                 lblError.Visible = true;
                 lblError.Text = string.Join("<br/>", errores);
-                return; // NO continuar, NO guardar, NO redirigir
+                return;
             }
 
             try 
@@ -102,7 +84,25 @@ namespace HotelReservaciones.Pages
 
             }//Fin try
             catch { } //Fin catch
-        }
+        }//Fin btn Guardar
+
+        protected void cuvCapacidadMax_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = false;
+            try
+            {
+                if (args.IsValid != null)
+                {
+                    int numeroCapacidad = Convert.ToInt32(txtCapacidadMax.Text);
+                    if (numeroCapacidad > 0 && numeroCapacidad <= 8)
+                    {
+                        args.IsValid = true;
+                    }//Fin if capacidad
+                }//Fin if arg
+            }//Fin try
+            catch (Exception ex)
+            { args.IsValid = false; }//Fin catch
+        }//Fin cuvCapacidad
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
