@@ -23,6 +23,7 @@ namespace HotelReservaciones
                     Boolean Empleado = Convert.ToBoolean(Session["esEmpleado"]);
                     if (Empleado == true) 
                     { lblbtGestionarRes.Visible = true;
+                        lblbtMisReservaciones.Visible = true;
                         lblbtGestionarHab.Visible = true;
                         lblbtCerrar.Visible = true;
                     }//Fin if empleado

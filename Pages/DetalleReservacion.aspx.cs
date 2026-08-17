@@ -36,8 +36,19 @@ namespace HotelReservaciones.Pages
                     int id = int.Parse(Request.QueryString["idReservacion"]);
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase")) 
                     { 
-                        var reservacion = db.SpObtenerReservacionPorId(id).FirstOrDefault();
-                        var lista = db.SpBitacoraPorReservacion(id).ToList();
+                        var reservacion = db.SpObtenerReservacionPorId(id).FirstOrDefault();//Se usa para cargar la info en la tabla
+                        string estado = db.SpConsultarReservacionParaModificar(id).FirstOrDefault().Estado.ToString(); //Se usa para obetner el estado, eso es usado en cancelar la reserva
+                        var lista = db.SpBitacoraPorReservacion(id).ToList();//Se usa para cargar el grd de bitacora
+
+                        if (estado == "A") 
+                        {
+                            if (esEmpleado == true && reservacion.FechaSalida > DateTime.Now.Date) { btnEditar.Visible = true; }
+                            else if (esEmpleado == false && reservacion.FechaEntrada > DateTime.Now.Date) { btnEditar.Visible = true; }
+                        }//Fin estado A btnEditar, esto vuelve el boton visible si se cumple las condiciones.
+
+                        if (estado == "A" && reservacion.FechaEntrada > DateTime.Now.Date) { btnCancelar.Visible = true; }
+                        //Fin estado A btnCancelar, esto vuelve el boton visible si se cumple las condiciones.
+
                         if (reservacion != null) 
                         {
                             txtNumReservacion.Text = reservacion.NumeroReservacion.ToString();
@@ -55,7 +66,7 @@ namespace HotelReservaciones.Pages
                             grdBitacora.DataSource = lista;
                             grdBitacora.DataBind();
 
-                        }//Fin IF reservacion
+                        }//Fin IF reservacion, si reservacion no es null, carga los detalles en el table
                         else 
                         {
                             if (esEmpleado)
@@ -81,16 +92,53 @@ namespace HotelReservaciones.Pages
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/ModificarReservacion");
-        }
+            Response.Redirect("~/Pages/ModificarReservacion.aspx?idReservacion=" + txtNumReservacion.Text, false);
+            Context.ApplicationInstance.CompleteRequest();
+        }//Fin btnEditar, redirige al usuario a la pagina editar para la reservacion especifica
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Boolean Empleado = Convert.ToBoolean(Session["esEmpleado"]);
-            if (Empleado)
-                Response.Redirect("~/Pages/GestionarReservaciones.aspx");
-            else
-                Response.Redirect("~/Pages/MisReservaciones.aspx");
-        }
+            try
+            {
+                int reservacionID = Convert.ToInt32(txtNumReservacion.Text);
+                Boolean empleado = Convert.ToBoolean(Session["esEmpleado"]);
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
+                {
+                    var reservacionDetalle = db.SpConsultarReservacionParaModificar(reservacionID).FirstOrDefault();
+                    string estadoR = reservacionDetalle.Estado.ToString();
+
+                    if (estadoR == "I")
+                    {
+                        if (empleado == true) { Response.Redirect("~/Pages/GestionarReservaciones.aspx"); }
+                        else { Response.Redirect("~/Pages/MisReservaciones.aspx"); } //Fin if/else empleado.
+                    }//Fin if Estado = I, no se puede cancelar de nuevo.
+
+                    DateTime fechaSalida = reservacionDetalle.FechaSalida;
+                    DateTime fechaEntrada = reservacionDetalle.FechaEntrada;
+
+                    if (fechaSalida <= DateTime.Now.Date)
+                    {
+                        if (empleado == true) { Response.Redirect("~/Pages/GestionarReservaciones.aspx"); }
+                        else { Response.Redirect("~/Pages/MisReservaciones.aspx"); } //Fin if/else empleado.
+                    }//Fin if fecha salida, si salida es menor al dia de hoy, no se puede cancelar, redirige segun es empleado
+
+                    if (fechaEntrada <= DateTime.Now.Date && fechaSalida > DateTime.Now.Date)
+                    {
+                        if (empleado == true) { Response.Redirect("~/Pages/GestionarReservaciones.aspx"); }
+                        else { Response.Redirect("~/Pages/MisReservaciones.aspx"); } //Fin if/else empleado. }
+                    }//Fin feacha de entrada/salida, si la reservacion esta en proceso, solo empleados pueden modificarla
+
+                    int idPersona = Convert.ToInt32(Session["idPersona"]);
+                    db.SpCancelarReservacion(reservacionID, idPersona);
+
+                    Response.Redirect("~/Pages/ReservacionCancelada.aspx");
+
+                }//Fin DB
+            }//Fin try
+            catch
+            {
+
+            }
+        }//Fin btnCancelar
     }
 }

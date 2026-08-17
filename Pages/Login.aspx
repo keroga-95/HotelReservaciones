@@ -3,7 +3,6 @@
 
     <div class="d-flex justify-content-center align-items-center" style="height:35vh;">
         <div>
-
             <div class="mb-1">
                 <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label><br />
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox><br />
@@ -16,8 +15,10 @@
                 <asp:RequiredFieldValidator ID="rfvContrasena" runat="server" ErrorMessage="Por favor ingresa la contraseña" ControlToValidate="txtContrasenia" ForeColor="Red" Font-Bold="true"></asp:RequiredFieldValidator>
             </div>
 
-            <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary w-100" OnClick="btnIngresar_Click" />
-
+            <div>
+                <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary w-100" OnClick="btnIngresar_Click" /><br />
+                <asp:Label ID="lblError" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
+            </div>
         </div>
     </div>
 </asp:Content>

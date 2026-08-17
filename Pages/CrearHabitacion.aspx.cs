@@ -28,7 +28,7 @@ namespace HotelReservaciones.Pages
                         ddlHoteles.DataValueField = "idHotel";
                         ddlHoteles.DataBind();
                         ddlHoteles.Items.Insert(0, new ListItem("Seleccione un hotel", "0"));
-                    }
+                    }//Fin db, usa un SP para cargar el ddl con el nombre y id de los hoteles
                 }//Fin if session
                 else
                 {
@@ -45,7 +45,7 @@ namespace HotelReservaciones.Pages
                 lblError.Visible = true;
                 lblError.Text = "Hay errores en la información. Revise los campos marcados.";
                 return;
-            }
+            }//Confirma que no haya errores eb la informacion cargada.
 
             List<string> errores = new List<string>();
 
@@ -66,7 +66,8 @@ namespace HotelReservaciones.Pages
                 lblError.Visible = true;
                 lblError.Text = string.Join("<br/>", errores);
                 return;
-            }
+            }/*Esta lista de if, crea una lista en blanco, y por cada espacio en blaco encontrado, se agrega a la lista. 
+              Esta lista se muestra en un label si 1 o mas espacios quedan en blanco */
 
             try 
             {
@@ -78,7 +79,7 @@ namespace HotelReservaciones.Pages
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase")) 
                 {
                     db.SpCrearHabitacion(idHotel,numeroHabitacion,capacidadMax,descripcion);
-                }//Fin db
+                }//Fin db. Despues de confirmar toda la info es correcta, se uan un SP para cargar la info en la BD.
 
                 Response.Redirect("~/Pages/ExitoHabitacion.aspx");
 
@@ -102,7 +103,7 @@ namespace HotelReservaciones.Pages
             }//Fin try
             catch (Exception ex)
             { args.IsValid = false; }//Fin catch
-        }//Fin cuvCapacidad
+        }//Fin cuvCapacidad, confirma que todas la habitaciones solo acepten de 1 a 8 huespedes.
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
@@ -163,6 +164,6 @@ namespace HotelReservaciones.Pages
             }//Fin try
             catch (Exception ex)
             { args.IsValid = false; }//Fin catch
-        }//Fin cuvDescripcion
+        }//Fin cuvDescripcion, valida el numero de caracteres sea entre 0 a 500
     }
 }

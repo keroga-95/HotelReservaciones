@@ -23,7 +23,8 @@ namespace HotelReservaciones.Pages
                     {
                         using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
                         {
-                            var reservacion = db.SpReservacionesParaEmpleado().ToList();
+                            int idPersona = Convert.ToInt32(Session["idPersona"]);
+                            var reservacion = db.SpReservacionesParaEmpleado(idPersona).ToList();
                             grdReservaciones.DataSource = reservacion;
                             grdReservaciones.DataBind();
 
@@ -36,7 +37,7 @@ namespace HotelReservaciones.Pages
                             ddlNombres.Items.Insert(0, new ListItem("Seleccione una persona", "0"));
 
 
-                        }//Fin DB
+                        }//Fin DB, usa la conexion a la BD y un SP para cargar las reservacions para el empleado. Tambien carga el ddl on los usuario activos
                     }//Fin IF ID != null and Empleado = true
                     else if (Empleado == false) 
                     {
@@ -45,7 +46,7 @@ namespace HotelReservaciones.Pages
                     else
                     {
                         Response.Redirect("~/Pages/Login.aspx");
-                    }
+                    }//Fin else/ifelse si el usurio no es empleado, redirige a misreservacions, y si la session es null, a login.
                 }
                 catch (Exception ex)
                 { }
@@ -67,15 +68,15 @@ namespace HotelReservaciones.Pages
                     grdReservaciones.DataSource = resultado;
 
                     grdReservaciones.DataBind();
-                }
-            }
+                }//Fin db, usa los detalles de la pagina, nombre del ddl, el cual nos da su ID, y fechas para realizar una busqueda.
+            }//Fin try
             catch (Exception ex) 
             { }
-        }//Fin btn
+        }//Fin btnBuscar
 
         public string EvaluadorEstado(string estado, DateTime fechaEntrada, DateTime fechaSalida)
         {
-            if (estado == "I")
+            if (estado == "I" || estado == "C")
             {
                 return "Cancelada";
             }
@@ -98,7 +99,7 @@ namespace HotelReservaciones.Pages
             {
                 return "Estado invalido";
             }//Fin IF "I"
-        }//fin Evaluador
+        }//fin Evaluador, segun el valor de Estado, lo cambia por su string completo.
 
         protected void cuvFecha_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -113,6 +114,6 @@ namespace HotelReservaciones.Pages
             }
             catch (Exception ex) 
             { args.IsValid = false; }
-        }//Fin cuvFecha
+        }//Fin cuvFecha, evalua que la fecha desde sea menor a la fecha hasta.
     }
 }

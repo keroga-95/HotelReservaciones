@@ -40,12 +40,15 @@
 
 <asp:GridView ID="grdReservaciones" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover">
     <Columns>
-        <asp:BoundField DataField="idReservacion" HeaderText="Reservacion" />
-        <asp:BoundField DataField="Nombre" HeaderText="Cliente" />
-        <asp:BoundField DataField="hotel" HeaderText="Hotel" />
-        <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada"  DataFormatString ="{0:dd/MM/yyyy}" />
-        <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida"  DataFormatString ="{0:dd/MM/yyyy}" />
-        <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="${0:N2}" />
+        <asp:BoundField DataField="idReservacion" HeaderText="# Reservacion" HeaderStyle-CssClass="text-center"  ItemStyle-HorizontalAlign="Center"/>
+        <asp:BoundField DataField="Nombre" HeaderText="Cliente" HeaderStyle-CssClass="text-start"  ItemStyle-HorizontalAlign="Left"/>
+        <asp:BoundField DataField="hotel" HeaderText="Hotel" HeaderStyle-CssClass="text-start"  ItemStyle-HorizontalAlign="Left"/>
+        <asp:BoundField DataField="fechaEntrada" HeaderText="Fecha entrada"  DataFormatString ="{0:dd/MM/yyyy}" 
+            HeaderStyle-CssClass="text-center"  ItemStyle-HorizontalAlign="Center"/>
+        <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida"  DataFormatString ="{0:dd/MM/yyyy}" 
+            HeaderStyle-CssClass="text-center"  ItemStyle-HorizontalAlign="Center"/>
+        <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="${0:N2}" 
+            HeaderStyle-CssClass="text-end"  ItemStyle-HorizontalAlign="Right"/>
 
         <asp:TemplateField HeaderText="Estado">
             <ItemTemplate>

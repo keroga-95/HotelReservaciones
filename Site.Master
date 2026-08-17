@@ -56,7 +56,7 @@
                         <li class="nav-item"><a id="lblbtGestionarHab" class="nav-link" runat="server" Visible="false" href="~/Pages/ListaHabitaciones.aspx">Gestionar habitaciones</a></li>
                         
                         <li class="nav-item">
-                            <asp:LinkButton ID="lblbtCerrar" runat="server" CssClass="nav-link" OnClick="lblbtCerrar_Click" Visible="false" CausesValidation="false">Cerrar Sesion</asp:LinkButton>
+                            <asp:LinkButton ID="lblbtCerrar" runat="server" CssClass="nav-link" OnClick="lblbtCerrar_Click" OnClientClick="return confirm('¿Está seguro que desea cerrar la sesión?');" Visible="false" CausesValidation="false">Cerrar Sesion</asp:LinkButton>
                         </li>
                     </ul> 
                 </div>

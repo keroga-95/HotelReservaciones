@@ -31,7 +31,6 @@ namespace HotelReservaciones.Pages
                     if (string.IsNullOrEmpty(Request.QueryString["idHabitacion"]))
                     {
                         Response.Redirect("~/Pages/HabitacionInactiva.aspx");
-                        return;
                     }//Fin QueryString null
 
 

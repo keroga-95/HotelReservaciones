@@ -3,4 +3,8 @@
     <h2>Habitación en uso</h2>
 
     <h4>La habitación no puede ser modificada debido a que existen reservaciones “En proceso” o “En espera” asociadas a la habitación</h4>
+
+    <div class="mb-2">
+        <a href="ListaHabitaciones.aspx" class="btn btn-outline-primary">Regresar</a>
+    </div>
 </asp:Content>
