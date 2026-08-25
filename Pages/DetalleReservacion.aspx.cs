@@ -102,10 +102,25 @@ namespace HotelReservaciones.Pages
             {
                 int reservacionID = Convert.ToInt32(txtNumReservacion.Text);
                 Boolean empleado = Convert.ToBoolean(Session["esEmpleado"]);
+                int idPersona = Convert.ToInt32(Session["idPersona"]);
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("MyDatabase"))
                 {
-                    var reservacionDetalle = db.SpConsultarReservacionParaModificar(reservacionID).FirstOrDefault();
-                    string estadoR = reservacionDetalle.Estado.ToString();
+                    /*var reservacionDetalle = db.SpConsultarReservacionParaModificar(reservacionID).FirstOrDefault();
+                    string estadoR = reservacionDetalle.Estado.ToString();*/
+
+                    var resultados = db.SpConsultarReservacionParaModificar(reservacionID).ToList();
+
+                    if (resultados.Count == 0)
+                    {
+                        throw new Exception(
+                            "El procedimiento SpConsultarReservacionParaModificar no devolvió resultados para el ID: "
+                            + reservacionID
+                        );
+                    }
+
+                    var reservacionDetalle = resultados.First();
+
+                    string estadoR = reservacionDetalle.Estado.ToString();//Temporal
 
                     if (estadoR == "I")
                     {
@@ -128,8 +143,8 @@ namespace HotelReservaciones.Pages
                         else { Response.Redirect("~/Pages/MisReservaciones.aspx"); } //Fin if/else empleado. }
                     }//Fin feacha de entrada/salida, si la reservacion esta en proceso, solo empleados pueden modificarla
 
-                    int idPersona = Convert.ToInt32(Session["idPersona"]);
-                    db.SpCancelarReservacion(reservacionID, idPersona);
+
+                    db.SpCancelarReservacion(reservacionID);
 
                     Response.Redirect("~/Pages/ReservacionCancelada.aspx");
 
@@ -137,7 +152,7 @@ namespace HotelReservaciones.Pages
             }//Fin try
             catch
             {
-
+                throw;
             }
         }//Fin btnCancelar
     }

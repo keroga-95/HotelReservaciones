@@ -49,7 +49,7 @@
 
         <div class="mb-3">
             <asp:Button ID="btnEditar" runat="server" Text="Editar reservacion" CssClass="btn btn-outline-primary" OnClick="btnEditar_Click" Visible="false" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservacion" CssClass="btn btn-outline-danger" OnClick="btnCancelar_Click" Visible="false" OnClientClick="return confirm('¿Está seguro que desea cancelar la reservacion?'"/>
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservacion" CssClass="btn btn-outline-danger" OnClick="btnCancelar_Click" Visible="false" OnClientClick="return confirm('¿Está seguro que desea cancelar la reservacion?')"/>
             <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-dark" OnClick="btnRegresar_Click" />
         </div>
         

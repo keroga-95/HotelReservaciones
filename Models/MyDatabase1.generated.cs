@@ -275,132 +275,14 @@ namespace DataModels
 
 		#region SpCancelarReservacion
 
-		public static int SpCancelarReservacion(this PvProyectoFinalDB dataConnection, int? @IdReservacion, int? @IdPersona)
+		public static int SpCancelarReservacion(this PvProyectoFinalDB dataConnection, int? @IdReservacion)
 		{
 			var parameters = new []
 			{
-				new DataParameter("@IdReservacion", @IdReservacion, LinqToDB.DataType.Int32),
-				new DataParameter("@IdPersona",     @IdPersona,     LinqToDB.DataType.Int32)
+				new DataParameter("@IdReservacion", @IdReservacion, LinqToDB.DataType.Int32)
 			};
 
 			return dataConnection.ExecuteProc("[dbo].[SpCancelarReservacion]", parameters);
-		}
-
-		#endregion
-
-		#region SpConsultarHotel
-
-		public static IEnumerable<SpConsultarHotelResult> SpConsultarHotel(this PvProyectoFinalDB dataConnection, int? @idPersona)
-		{
-			var parameters = new []
-			{
-				new DataParameter("@idPersona", @idPersona, LinqToDB.DataType.Int32)
-			};
-
-			return dataConnection.QueryProc<SpConsultarHotelResult>("[dbo].[spConsultarHotel]", parameters);
-		}
-
-		public partial class SpConsultarHotelResult
-		{
-			[Column("idReservacion")       ] public int      IdReservacion        { get; set; }
-			[Column("nombreHotel")         ] public string   NombreHotel          { get; set; }
-			[Column("numeroHabitacion")    ] public string   NumeroHabitacion     { get; set; }
-			[Column("fechaEntrada")        ] public DateTime FechaEntrada         { get; set; }
-			[Column("fechaSalida")         ] public DateTime FechaSalida          { get; set; }
-			[Column("numeroAdultos")       ] public int      NumeroAdultos        { get; set; }
-			[Column("numeroNinhos")        ] public int      NumeroNinhos         { get; set; }
-			[Column("totalDiasReservacion")] public int      TotalDiasReservacion { get; set; }
-			[Column("costoTotal")          ] public decimal  CostoTotal           { get; set; }
-			[Column("estado")              ] public char     Estado               { get; set; }
-		}
-
-		#endregion
-
-		#region SpConsultarReservacion
-
-		public static IEnumerable<SpConsultarReservacionResult> SpConsultarReservacion(this PvProyectoFinalDB dataConnection, int? @idReservacion)
-		{
-			var parameters = new []
-			{
-				new DataParameter("@idReservacion", @idReservacion, LinqToDB.DataType.Int32)
-			};
-
-			return dataConnection.QueryProc<SpConsultarReservacionResult>("[dbo].[spConsultarReservacion]", parameters);
-		}
-
-		public partial class SpConsultarReservacionResult
-		{
-			public int      IdReservacion        { get; set; }
-			public int      IdHabitacion         { get; set; }
-			public DateTime FechaEntrada         { get; set; }
-			public DateTime FechaSalida          { get; set; }
-			public int      NumeroAdultos        { get; set; }
-			public int      NumeroNinhos         { get; set; }
-			public int      TotalDiasReservacion { get; set; }
-			public decimal  CostoTotal           { get; set; }
-			public char     Estado               { get; set; }
-			public int      IdPersona            { get; set; }
-		}
-
-		#endregion
-
-		#region SpConsultarReservacionesCliente
-
-		public static IEnumerable<SpConsultarReservacionesClienteResult> SpConsultarReservacionesCliente(this PvProyectoFinalDB dataConnection, int? @IdPersona, DateTime? @FechaDesde, DateTime? @FechaHasta)
-		{
-			var parameters = new []
-			{
-				new DataParameter("@IdPersona",  @IdPersona,  LinqToDB.DataType.Int32),
-				new DataParameter("@FechaDesde", @FechaDesde, LinqToDB.DataType.Date),
-				new DataParameter("@FechaHasta", @FechaHasta, LinqToDB.DataType.Date)
-			};
-
-			return dataConnection.QueryProc<SpConsultarReservacionesClienteResult>("[dbo].[spConsultarReservacionesCliente]", parameters);
-		}
-
-		public partial class SpConsultarReservacionesClienteResult
-		{
-			[Column("idReservacion")       ] public int      IdReservacion        { get; set; }
-			[Column("idPersona")           ] public int      IdPersona            { get; set; }
-			[Column("idHabitacion")        ] public int      IdHabitacion         { get; set; }
-			[Column("fechaEntrada")        ] public DateTime FechaEntrada         { get; set; }
-			[Column("fechaSalida")         ] public DateTime FechaSalida          { get; set; }
-			[Column("numeroAdultos")       ] public int      NumeroAdultos        { get; set; }
-			[Column("numeroNinhos")        ] public int      NumeroNinhos         { get; set; }
-			[Column("totalDiasReservacion")] public int      TotalDiasReservacion { get; set; }
-			[Column("costoTotal")          ] public decimal  CostoTotal           { get; set; }
-			[Column("estado")              ] public char     Estado               { get; set; }
-		}
-
-		#endregion
-
-		#region SpConsultarReservacionesEmpleado
-
-		public static IEnumerable<SpConsultarReservacionesEmpleadoResult> SpConsultarReservacionesEmpleado(this PvProyectoFinalDB dataConnection, string @nombreClienteFiltro, DateTime? @fechaEntradaFiltro, DateTime? @fechaSalidaFiltro, int? @idEmpleadoAutenticado)
-		{
-			var parameters = new []
-			{
-				new DataParameter("@nombreClienteFiltro",   @nombreClienteFiltro,   LinqToDB.DataType.NVarChar)
-				{
-					Size = 255
-				},
-				new DataParameter("@fechaEntradaFiltro",    @fechaEntradaFiltro,    LinqToDB.DataType.Date),
-				new DataParameter("@fechaSalidaFiltro",     @fechaSalidaFiltro,     LinqToDB.DataType.Date),
-				new DataParameter("@idEmpleadoAutenticado", @idEmpleadoAutenticado, LinqToDB.DataType.Int32)
-			};
-
-			return dataConnection.QueryProc<SpConsultarReservacionesEmpleadoResult>("[dbo].[spConsultarReservacionesEmpleado]", parameters);
-		}
-
-		public partial class SpConsultarReservacionesEmpleadoResult
-		{
-			[Column("idReservacion")] public int      IdReservacion { get; set; }
-			[Column("nombreCliente")] public string   NombreCliente { get; set; }
-			[Column("nombreHotel")  ] public string   NombreHotel   { get; set; }
-			[Column("fechaEntrada") ] public DateTime FechaEntrada  { get; set; }
-			[Column("fechaSalida")  ] public DateTime FechaSalida   { get; set; }
-			[Column("costoTotal")   ] public decimal  CostoTotal    { get; set; }
-			[Column("estado")       ] public char     Estado        { get; set; }
 		}
 
 		#endregion
@@ -663,21 +545,6 @@ namespace DataModels
 
 		#endregion
 
-		#region SpObtenerClientesActivos
-
-		public static IEnumerable<SpObtenerClientesActivosResult> SpObtenerClientesActivos(this PvProyectoFinalDB dataConnection)
-		{
-			return dataConnection.QueryProc<SpObtenerClientesActivosResult>("[dbo].[spObtenerClientesActivos]");
-		}
-
-		public partial class SpObtenerClientesActivosResult
-		{
-			[Column("idPersona")     ] public int    IdPersona      { get; set; }
-			[Column("nombreCompleto")] public string NombreCompleto { get; set; }
-		}
-
-		#endregion
-
 		#region SpObtenerCostosHotel
 
 		public static IEnumerable<SpObtenerCostosHotelResult> SpObtenerCostosHotel(this PvProyectoFinalDB dataConnection, int? @idHotel)
@@ -719,36 +586,6 @@ namespace DataModels
 			[Column("capacidadMaxima") ] public int    CapacidadMaxima  { get; set; }
 			[Column("descripcion")     ] public string Descripcion      { get; set; }
 			[Column("estado")          ] public char   Estado           { get; set; }
-		}
-
-		#endregion
-
-		#region SpObtenerHotelesActivos
-
-		public static IEnumerable<SpObtenerHotelesActivosResult> SpObtenerHotelesActivos(this PvProyectoFinalDB dataConnection)
-		{
-			return dataConnection.QueryProc<SpObtenerHotelesActivosResult>("[dbo].[spObtenerHotelesActivos]");
-		}
-
-		public partial class SpObtenerHotelesActivosResult
-		{
-			[Column("idHotel")] public int    IdHotel { get; set; }
-			[Column("nombre") ] public string Nombre  { get; set; }
-		}
-
-		#endregion
-
-		#region SpObtenerPersonasActivas
-
-		public static IEnumerable<SpObtenerPersonasActivasResult> SpObtenerPersonasActivas(this PvProyectoFinalDB dataConnection)
-		{
-			return dataConnection.QueryProc<SpObtenerPersonasActivasResult>("[dbo].[spObtenerPersonasActivas]");
-		}
-
-		public partial class SpObtenerPersonasActivasResult
-		{
-			[Column("idPersona")     ] public int    IdPersona      { get; set; }
-			[Column("nombreCompleto")] public string NombreCompleto { get; set; }
 		}
 
 		#endregion
